@@ -34,10 +34,8 @@
 				echo$me1;
 				echo$me2;
 				$conexion=$libre_v2->login('localhost',$_POST['user'],$_POST['pass'],'',$phpv);
-				//$conexion=login('localhost',$_POST['user'],$_POST['pass']);
 				if ($_POST['menu']=='')$_POST['menu']=$m1;
 				if($_POST['menu']==$m1){include('Cuentas.php');}
-				//if($_POST[menu]==$m3){include('facturas/cargador.php');}
 				
 			}
 			

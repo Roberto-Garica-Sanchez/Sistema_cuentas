@@ -33,7 +33,7 @@
                         )
                     )
                 );
-                $Folio->interface($array);    
+                $Folio->Interface_de_usuario($array);    
                 /*
             #tabla fechas
                 $database='cuentas_carmesi';
@@ -64,7 +64,7 @@
                         )
                     )
                 );
-                $Folio->interface($array);      
+                $Folio->Interface_de_usuario($array);      
                 #tabla kilometrajes
                     $database='cuentas_carmesi';
                     $tabla='km';
@@ -94,7 +94,7 @@
                             )
                         )
                     );
-                    $Folio->interface($array);  
+                    $Folio->Interface_de_usuario($array);  
 
                     */
         echo"</div>";

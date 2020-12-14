@@ -114,10 +114,18 @@ $consu_abo_acu	= 	$libre_v2->consulta	('abo_acu'	,$conexion	,'','',''			,'1',$ph
 				$abonos->Nombre='Abonos';
 				$abonos->add_columna('Fechas');
 				$abonos->add_columna('Cantidad');
+				$abonos->columnas_requeridas(
+					array(
+						'Fechas'=>false,
+						'Cantidad'=>true
+						)
+				);
 				$abonos->title['Fechas']['propiedades']['value']='Fecha';
 				$abonos->title['Cantidad']['propiedades']['value']='Cantidad';
 				$abonos->title['Fechas']['propiedades']['class']=' Medio botone_n';
 				$abonos->title['Cantidad']['propiedades']['class']='Celdas Medio botone_n ';# botone_n 
+				$abonos->title['Fechas']['propiedades']['disabled']=true;
+				$abonos->title['Cantidad']['propiedades']['disabled']=true;
 				$abonos->colunas['Fechas']['propiedades']['class']='Celdas Medio botones_submenu mediano ';#botones_submenu
 				$abonos->colunas['Cantidad']['propiedades']['class']='Celdas Medio botones_submenu';
 

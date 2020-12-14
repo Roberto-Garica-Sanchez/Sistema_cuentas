@@ -1,7 +1,7 @@
 <?php 
 
-if (empty($libre_v1))	{	include("../libre_v1.php");}	if ($libre_v1==''){echo"Error de Carga 'libre_v1'";}
-if (empty($libre_v2))	{	include("../libre_v2.php");}	if ($libre_v2==''){echo"Error de Carga 'libre_v2'";}
+#if (empty($libre_v1))	{	include("../libre_v1.php");}	if ($libre_v1==''){echo"Error de Carga 'libre_v1'";}
+#if (empty($libre_v2))	{	include("../libre_v2.php");}	if ($libre_v2==''){echo"Error de Carga 'libre_v2'";}
 
 if(empty($libre_v2))$libre_v2= new libre_v2('php7',$conexion);
 if(empty($tablas_v2))$tablas_v2= new tablas_v2();

@@ -3,7 +3,7 @@
     #### Informacion primaria
         echo"<div id='datos_info'>";		
             #tabla Folio
-                $database='cuentas_carmesi';
+                #$database='cuentas_carmesi';
                 $tabla='mapa_de_folios';
                 $Folio= new inface($database,$tabla,$phpv,$conexion);
                 if(empty($view))$view='';

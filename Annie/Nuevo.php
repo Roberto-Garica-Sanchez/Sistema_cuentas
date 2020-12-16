@@ -128,7 +128,7 @@ $consu_abo_acu	= 	$libre_v2->consulta	('abo_acu'	,$conexion	,'','',''			,'1',$ph
 				$abonos->title['Cantidad']['propiedades']['disabled']=true;
 				$abonos->colunas['Fechas']['propiedades']['class']='Celdas Medio botones_submenu mediano ';#botones_submenu
 				$abonos->colunas['Cantidad']['propiedades']['class']='Celdas Medio botones_submenu';
-
+				$abonos->contro_lista_autoSuma(array('Cantidad'));
 				$abonos->view();
 			
 			echo "</div>";	

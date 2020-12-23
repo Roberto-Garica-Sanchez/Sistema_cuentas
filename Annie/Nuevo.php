@@ -121,12 +121,15 @@ $consu_abo_acu	= 	$libre_v2->consulta	('abo_acu'	,$conexion	,'','',''			,'1',$ph
 						)
 				);
 				$abonos->title['Fechas']['propiedades']['value']='Fecha';
-				$abonos->title['Cantidad']['propiedades']['value']='Cantidad';
 				$abonos->title['Fechas']['propiedades']['class']=' Medio botone_n';
-				$abonos->title['Cantidad']['propiedades']['class']='Celdas Medio botone_n ';# botone_n 
 				$abonos->title['Fechas']['propiedades']['disabled']=true;
+				$abonos->title['Fechas']['propiedades']['style']['width']='140px';
+
+				$abonos->title['Cantidad']['propiedades']['value']='Cantidad';
+				$abonos->title['Cantidad']['propiedades']['class']='Celdas Medio botone_n ';# botone_n 
 				$abonos->title['Cantidad']['propiedades']['disabled']=true;
 				$abonos->colunas['Fechas']['propiedades']['class']='Celdas Medio botones_submenu mediano ';#botones_submenu
+				$abonos->colunas['Fechas']['propiedades']['type']='date';
 				$abonos->colunas['Cantidad']['propiedades']['class']='Celdas Medio botones_submenu';
 				$abonos->contro_lista_autoSuma(array('Cantidad'));
 				$abonos->view();

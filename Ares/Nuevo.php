@@ -84,6 +84,7 @@ if($_POST['name2set']=='Nuevo'){	//proceso de guardado
 		if(!empty($_POST['Carta2'])and($_POST['Carta2']==$_POST['Carta4'])){$style_Carta2=$red;$style_Carta4=$red;$grava=false;$open_consola=true;$resc=$resc."Carta Porte 2($_POST[Carta2]) Igual A Carta4 ($_POST[Carta4])<br>";}
 		
 		if(!empty($_POST['Carta3'])and($_POST['Carta3']==$_POST['Carta4'])){$style_Carta3=$red;$style_Carta4=$red;$grava=false;$open_consola=true;$resc=$resc."Carta Porte 3($_POST[Carta3]) Igual A Carta4 ($_POST[Carta4])<br>";}
+		if(empty($resc))$resc='';
 		if(("000000"==$fec_fin)or("000000"==$fec_fin))	{
 			$grava=false;
 			$open_consola=true;
@@ -92,16 +93,16 @@ if($_POST['name2set']=='Nuevo'){	//proceso de guardado
 			$style_A=$style_A_r=$red;
 			$resc=$resc."Fecha Faltante<br>";
 		}		
-		if($_POST['chofer']=='chofer'){$grava=false;$open_consola=true;$style_chofer=$red;}
-		if($_POST['placas']=='placas'){$grava=false;$open_consola=true;$style_placas=$red;}
-		if($_POST['cliente']=='cliente'){$grava=false;$open_consola=true;$style_cliente=$red;}
-		if($_POST['Carta1']=="")	{$grava=false;$open_consola=true;$style_Carta1=$red;}
-		if($_POST['D']=="")		{$grava=false;$open_consola=true;$style_D=$red;}
-		if($_POST['D_r']=="")		{$grava=false;$open_consola=true;$style_D_r=$red;}
-		if($_POST['M']=="")		{$grava=false;$open_consola=true;$style_M=$red;}
-		if($_POST['M_r']=="")		{$grava=false;$open_consola=true;$style_M_r=$red;}
-		if($_POST['A']=="")		{$grava=false;$open_consola=true;$style_A=$red;}
-		if($_POST['A_r']=="")		{$grava=false;$open_consola=true;$style_A_r=$red;}
+		if(empty($_POST['chofer']) or $_POST['chofer']=='chofer'){$grava=false;$open_consola=true;$style_chofer=$red;}
+		if(empty($_POST['placas']) or $_POST['placas']=='placas'){$grava=false;$open_consola=true;$style_placas=$red;}
+		if(empty($_POST['cliente']) or $_POST['cliente']=='cliente'){$grava=false;$open_consola=true;$style_cliente=$red;}
+		if(empty($_POST['Carta1']))	{$grava=false;$open_consola=true;$style_Carta1=$red;}
+		if(empty($_POST['D'] ))		{$grava=false;$open_consola=true;$style_D=$red;}
+		if(empty($_POST['D_r']))		{$grava=false;$open_consola=true;$style_D_r=$red;}
+		if(empty($_POST['M']))		{$grava=false;$open_consola=true;$style_M=$red;}
+		if(empty($_POST['M_r']))		{$grava=false;$open_consola=true;$style_M_r=$red;}
+		if(empty($_POST['A']))		{$grava=false;$open_consola=true;$style_A=$red;}
+		if(empty($_POST['A_r']))		{$grava=false;$open_consola=true;$style_A_r=$red;}
 		if($fec_ini>$fec_fin)	{//que la fecha final sea mayor que la fecha inicial 
 			$grava=false;
 			$open_consola=true;
@@ -110,25 +111,27 @@ if($_POST['name2set']=='Nuevo'){	//proceso de guardado
 			$style_A=$style_A_r=$red;
 			$resc=$resc."Fecha Incorecta<br>";
 		}
-		if($_POST['km_i']=='')	{//que este ingresado el kilometraje inicial
+		if(empty($_POST['km_i']))	{//que este ingresado el kilometraje inicial
 			$grava=false;
 			$open_consola=true;
 			$style_km_i=$red;
 			$resc=$resc."Kilometraje Faltante<br>";
 		}
-		if($_POST['km_f']=='')	{//que este ingresado el kilometraje final
+		if(empty($_POST['km_f']))	{//que este ingresado el kilometraje final
 			$grava=false;
 			$open_consola=true;
 			$style_km_f=$red;
 			$resc=$resc."Kilometraje Faltante<br>";
 		}
-		$total_km=$_POST['km_f']-$_POST['km_i'];
-		if ($_POST['km_i']>=$_POST['km_f'])				{//que este kilometraje correcto 
-			$grava=false;
-			$open_consola=true;
-			$style_km_i=$style_km_f=$red;
-			$resc=$resc."Kilometrajes Invertido <br>";
-		}	
+		if(!empty($_POST['km_i'])and !empty($_POST['km_f']) ){
+			$total_km=$_POST['km_f']-$_POST['km_i'];		
+			if ($_POST['km_i']>=$_POST['km_f'])				{//que este kilometraje correcto 
+				$grava=false;
+				$open_consola=true;
+				$style_km_i=$style_km_f=$red;
+				$resc=$resc."Kilometrajes Invertido <br>";
+			}	
+		}
 		if($open_consola==true)$consola="open";
 	}
 }

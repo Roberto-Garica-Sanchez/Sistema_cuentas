@@ -32,14 +32,16 @@ echo"<div id='general_info' class='general_info colores_paleta1a' >";
         echo $libre_v5->despieges($estado_Despiege);
 
         echo $libre_v5->input('text','','Operador','','botone_n','','disabled  ','width: 40%;');
-        echo $libre_v2->despliegre_mysql	('chofer','Operador',$consu_choferes,'Nombre',$phpv,"style='width: 60%;' id='CHOFER' onchange='carga_arrastrados();'",'botones_submenu','Nombre','');
+        echo $libre_v2->despliegre_mysql	('CHOFER','Operador',$consu_choferes,'Nombre',$phpv,"style='width: 60%;' id='CHOFER' onchange='carga_arrastrados();'",'botones_submenu','Nombre','');
 
         echo $libre_v5->input('text','','Unidad','','botone_n','','disabled','width: 40%;');
-        echo $libre_v2->despliegre_mysql	('placas','Unidad',$consu_placas,'Placas',$phpv,"style='width: 60%;' id='placas'",'botones_submenu','Placas','');
+        echo $libre_v2->despliegre_mysql	('PLACAS','Unidad',$consu_placas,'Placas',$phpv,"style='width: 60%;' id='placas'",'botones_submenu','Placas','');
 
         echo $libre_v5->input('text','','Cliente','','botone_n','','disabled','width: 40%;');
-        echo $libre_v2->despliegre_mysql	('cliente','Cliente',$consu_clientes,'Nombre',$phpv,"style='width: 60%; ' id='cliente'",'botones_submenu','Nombre','');
-        
+        echo $libre_v2->despliegre_mysql	('CLIENTE','Cliente',$consu_clientes,'Nombre',$phpv,"style='width: 60%; ' id='cliente'",'botones_submenu','Nombre','');
+
+        echo $libre_v5->input('hidden','Carta','',$_POST['Carta'],'botones_submenu','','maxlength ="4"onkeypress="return valida_n(event,Carta2)"','width: 60%;');
+
         echo $libre_v5->input('button','','Cartas Portes','','botone_n','','disabled','width: 100%;');
         echo $libre_v5->input('button','','Principal','','botone_n','','disabled','width: 40%;');
         echo $libre_v5->input('text','Carta1','','Carta1','botones_submenu','','maxlength ="4"onkeypress="return valida_n(event,Carta2)"','width: 60%;');
@@ -63,14 +65,18 @@ echo"<div id='general_info' class='general_info colores_paleta1a' >";
         echo $libre_v5->input('text','Kilometraje_Final','','Kilometraje_Final','botones_submenu','','onkeypress="return valida_n(event,)"','width: 60%;');
         
         echo $libre_v5->input('button','','Comentarios','','botone_n','','disabled','width: 100%;');
-        echo $libre_v2->input2('tarea','Comentario_principal','',''	,"width: 100%;height: 60px;",'come'		,' placeholder="" maxlength ="250"','botones_submenu');
+        echo $libre_v2->input2('tarea','Descripcion','',''	,"width: 100%;height: 60px;",'come'		,' placeholder="" maxlength ="250"','botones_submenu');
        echo"</div>";
+    /* 
     echo"<div style='position: relative;'>";
-        echo $libre_v2->input2('button','operador','',"Limpiar"			,'									bottom: 5px;		right: 110px;width: 110px;'					,'limpia_cuenta'		,'','botones_submenu');
-        echo $libre_v2->input2('button','operador','',"Guardar"			,'					width: 110px;	bottom: 5px;		right: 0px;'	,'guarda_cuenta'		,'','botones_submenu');
-        echo $libre_v2->input2('button','operador','',"Guardar Cambios"	,'display: none;	width: 110px;	bottom: 5px;		right: 0px;'	,'cambio_cuenta'		,'','botones_submenu');
-        echo $libre_v2->input2('button','operador','',"Confirmar"		,'display: none;	width: 110px;	bottom: 40px;	right: 0px;background: yellow;color: black;','confirma_cuenta','','botones_submenu');
+        echo $libre_v2->input2('submit','operador','',"Limpiar"			,'									bottom: 5px;		right: 110px;width: 110px;'					,'limpia_cuenta'		,'','botones_submenu');
+        echo $libre_v2->input2('submit','operador','',"Guardar"			,'					width: 110px;	bottom: 5px;		right: 0px;'	,'guarda_cuenta'		,'','botones_submenu');
+        echo $libre_v2->input2('submit','operador','',"Guardar Cambios"	,'display: none;	width: 110px;	bottom: 5px;		right: 0px;'	,'cambio_cuenta'		,'','botones_submenu');
+        echo $libre_v2->input2('submit','operador','',"Confirmar"		,'display: none;	width: 110px;	bottom: 40px;	right: 0px;background: yellow;color: black;','confirma_cuenta','','botones_submenu');
     echo"</div>";
+    */
+    
+    include("../Librerias/General/Consola_de_operaciones.php");
 echo"</div>";	
 
 ?>

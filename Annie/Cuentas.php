@@ -3,11 +3,11 @@
 #if (empty($libre_v1))	{	include("../libre_v1.php");}	if ($libre_v1==''){echo"Error de Carga 'libre_v1'";}
 #if (empty($libre_v2))	{	include("../libre_v2.php");}	if ($libre_v2==''){echo"Error de Carga 'libre_v2'";}
 
-if(empty($libre_v2))$libre_v2= new libre_v2('php7',$conexion);
-if(empty($tablas_v2))$tablas_v2= new tablas_v2();
+#if(empty($libre_v2))$libre_v2= new libre_v2('php7',$conexion);
+#if(empty($tablas_v2))$tablas_v2= new tablas_v2();
 			
 #if (empty($estilo)){echo"<LINK REL='STYLESHEET' HREF='../Cliente_de_legado/estilo.css' />";$estilo='cargado';}
-if (empty($estilo)){echo"<LINK REL='STYLESHEET' HREF='../estilo.css' />";$estilo='cargado';}
+#if (empty($estilo)){echo"<LINK REL='STYLESHEET' HREF='../estilo.css' />";$estilo='cargado';}
 $style='position: absolute;top: 60px;width: 105px;z-index: 1;';
 #echo $libre_v2->menu2('submit',$style,'id="sub_menu"','name2set','idI','id_I'	,'Nuevo','Folder','Modificar','Altas','Reporte','','','','','','',' ')	;
 
@@ -28,7 +28,7 @@ $otros_arrays=array(
 	'memoria'=>array('Activa'=>true,'type'=>'hidden')
 );
 $libre_v5->menu2($name_menu,$elemento_menu,$class,$otros_arrays);					
-
+/*
 if(empty($_POST['Soft_version'])){$_POST['Soft_version']="Ares";}
 if($_POST['Soft_version']!='Annie'){
 	if(empty($_POST['D_i']))$_POST['D_i']='';
@@ -47,10 +47,11 @@ if($_POST['Soft_version']!='Annie'){
 	echo $libre_v2->input2('hidden','A_f','',$_POST['A_f'],$style,'',$libre,'','','');
 }
 if(empty($_POST['operador']))$_POST['operador']='';
-if($_POST['operador']=='Limpiar'){include("limpia.php");}
+*/
+#if($_POST['operador']=='Limpiar'){include("limpia.php");}
 #echo"<div id='div_centro' style='color: black;width: 1250px;position: relative;overflow: hidden;top: 45px;height: 600px;background: url(../img/8.jpg);margin-right: auto;margin-left: auto;'>";
-	
-	if($_POST['Soft_version']=='Annie'){	
+include_once("Centro_de_procesos.php");
+	if($_POST['Soft_version']=='Annie' or $_POST['Soft_version']=='annie'){	
 		if ($_POST['name2set']=='Nuevo')		{include("Nuevo.php");}
 		if ($_POST['name2set']=='Nuevo2')		{include("Nuevo2.php");}
 		if ($_POST['name2set']=='Folder')		{include("folder2.php");}

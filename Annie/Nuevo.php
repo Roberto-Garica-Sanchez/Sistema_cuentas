@@ -136,6 +136,37 @@ $consu_abo_acu	= 	$libre_v2->consulta	('abo_acu'	,$conexion	,'','',''			,'1',$ph
 			
 			echo "</div>";	
 		echo "</div>";	
+	######################## Prestamos
+		echo "<div id='gene_Prestamos' 	style='display: block;float: left;padding: 5px;background: #28336985;margin: 2.5px;'>";
+			echo "<div style='position: relative;width: max-content;'>";
+				echo$libre_v5->input('button','','Prestamos','','Medio botone_n','','','width: 100%;');
+				$array['name']='Prestamos';
+				$Prestamos=new Columna_automaticas($phpv,$conexion,$array);
+				$Prestamos->Nombre='Prestamos';
+				$Prestamos->add_columna('Fechas');
+				$Prestamos->add_columna('Cantidad');
+				$Prestamos->columnas_requeridas(
+					array(
+						'Fechas'=>false,
+						'Cantidad'=>true
+						)
+				);
+				$Prestamos->title['Fechas']['propiedades']['value']='Fecha';
+				$Prestamos->title['Fechas']['propiedades']['class']=' Medio botone_n';
+				$Prestamos->title['Fechas']['propiedades']['disabled']=true;
+				$Prestamos->title['Fechas']['propiedades']['style']['width']='140px';
+
+				$Prestamos->title['Cantidad']['propiedades']['value']='Cantidad';
+				$Prestamos->title['Cantidad']['propiedades']['class']='Celdas Medio botone_n ';# botone_n 
+				$Prestamos->title['Cantidad']['propiedades']['disabled']=true;
+				$Prestamos->colunas['Fechas']['propiedades']['class']='Celdas Medio botones_submenu mediano ';#botones_submenu
+				$Prestamos->colunas['Fechas']['propiedades']['type']='date';
+				$Prestamos->colunas['Cantidad']['propiedades']['class']='Celdas Medio botones_submenu';
+				$Prestamos->contro_lista_autoSuma(array('Cantidad'));
+				$Prestamos->view();
+			
+			echo "</div>";	
+		echo "</div>";	
 	######################## Cuentas Actual 	
 		echo "<div id='gene_actua' class='' style='display: block;position: relative;background: #28336985;padding: 5px;width: 640px;float: right;margin: 2.5px;'>";	
 			echo$libre_v5->input('button','','Calculos de Cuenta Actual','','Medio botone_n','','','width: 100%;');

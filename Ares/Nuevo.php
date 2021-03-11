@@ -4,19 +4,15 @@
 //if ($libre_v1=='')	{	include("../libre_v1.php");}	if ($libre_v1==''){echo"Error de Carga 'libre_v1'";}
 //if ($libre_v2=='')	{	include("../libre_v2.php");}	if ($libre_v2==''){echo"Error de Carga 'libre_v2'";}
 //$libre_v2->db($db,$conexion,$phpv);
-$db='almacen';
-$libre_v2->db($db,$conexion,$phpv);
+
+$libre_v2->db('almacen',$conexion,$phpv);
 $consu_choferes	= 	$libre_v2->consulta	('operadores'	,$conexion	,'','','Nombre'	,'' ,$phpv,'','');
 $consu_placas	= 	$libre_v2->consulta	('unidades'		,$conexion	,'','','Placas'	,''	,$phpv,'','');
 $consu_clientes	= 	$libre_v2->consulta	('clientes'		,$conexion	,'','','Nombre'	,''	,$phpv,'','');
 $db='sistema_cuentas_ares';
 $libre_v2->db($db,$conexion,$phpv);
 if(empty($_POST['Carta0']) and !empty($_POST['Carta1'])){$_POST['Carta0']=$_POST['Carta1'];}
-/*
-$consu_choferes	= 	$libre_v2->consulta	('choferes'	,$conexion	,'','','Nombre_Ch'	,'',$phpv,'','');
-$consu_placas	= 	$libre_v2->consulta	('placas'	,$conexion	,'','','Placas'		,''	,$phpv,'','');
-$consu_clientes	= 	$libre_v2->consulta	('clientes'	,$conexion	,'','','Nombre_Cl'	,''	,$phpv,'','');
-*/
+if(!empty($_POST['Carta1'])) $_POST['ID_G']=$_POST['Carta1'];
 $consu_folio	= 	$libre_v2->consulta	('folio'	,$conexion	,'','',''			,'1',$phpv,'','');
 $consu_abo_acu	= 	$libre_v2->consulta	('abo_acu'	,$conexion	,'','',''			,'1',$phpv,'','');
 $folio			=	$tablas_v2->info($db,'folio');
@@ -41,7 +37,7 @@ if(!empty($_POST['Carta_arr'])){
 		if($datos[ID_G]==$_POST[$N1]){$_POST[$N2]=$datos[Total_Total];}
 	}
 }
-if($_POST['name2set']=='Nuevo'){	//proceso de guardado
+if($_POST['name2set']=='Nuevo'){	//proceso de guardados
 	if(!empty($_POST['N_Cuenta']) and !empty($N_fact))$_POST['N_Cuenta']=$N_fact+1;
 	if(!empty($_POST['operador']) and $_POST['operador']=="Guardar"){
 		$grava=true;
@@ -289,8 +285,7 @@ if($_POST['name2set']=='Modificar'){//proceso de modificado
 	//<>--------------------Nuevo  	
 	if(!empty($_POST['name2set']) and $_POST['name2set']=='Nuevo'){	
 		if(!empty($_POST['operador']) and ($_POST['operador']=="Guardar")and($grava==true)){
-			include("Guarda.php");
-			$resc=$resc."<br>Finalizado Guardando";
+			include("Guarda2.php");
 			$consola="open";
 		}
 	}

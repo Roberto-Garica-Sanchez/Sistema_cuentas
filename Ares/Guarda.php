@@ -2,7 +2,7 @@
 if ($libre_v1=='')	{	include("../libre_v1.php");}	if ($libre_v1==''){echo"Error de Carga 'libre_v1'";}
 if ($libre_v2=='')	{	include("../libre_v2.php");}	if ($libre_v2==''){echo"Error de Carga 'libre_v2'";}
 
-if($_POST['Soft_version']=='Ares'){
+if($_POST['Soft_version']=='ares'){
 	if(($_POST['name2set']=="Nuevo")or($_POST['name2set']=="Modificar")){
 		echo"<div id='consola_guarda' class='consola_guarda'style=''>";
 			echo "<div onclick='ventanas2(consola_guarda);'style='z-index: 1; position: absolute; width: 20px; height: 17px; background: #ada7a7; float: right; right: 0px; text-align: center;top: 0px;' >X</div>";
@@ -16,15 +16,17 @@ if($_POST['Soft_version']=='Ares'){
 			$colum=$array['columnas'];
 			$id=$_POST['Carta1'];
 			#$array_deseado	= array('folio','abo_acu','casetas','casetas_c','casetas_via','casetas_c_via','diesel','diesel_c','fechas','fletes','fletes_c','facturas','facturas_c','viaticos','viaticos_c','ryr','ryr_c','guias','guias_c','maniobras','maniobras_c','km');
-			/*
+			
 			//$array_deseado	= array(km);
+			echo"carga";
 			$res_VER_TB2=Verifica_en_tablas2($id,$tb,$array,$array_deseado,$conexion,$phpv);
+			echo"carga2s";
 			Repara_en_tabla($id,'','',$array,$res_VER_TB2,$database,$conexion,$phpv);		//incluse proceso insert	
 			Updates($database,$id,$array,$array_deseado,$conexion,$phpv);
 			echo"<div style='position: absolute;top: 5px;right: 5px;height: 570px;width: 370px;background: #000000c2;color: white;overflow-y: auto;overflow-x: hidden;'>";
 			//---//Actua($id,$conexion,$phpv);
 			actua2($id,$conexion,$phpv,1);
-			*/
+			
 			echo"</div>";
 		echo"</div>";
 	}
@@ -209,10 +211,10 @@ function Verifica_en_tablas	($id,$tb,$conexion,$phpv){
 }
 function Verifica_en_tablas2($id,$tb,$array,$array_deseado,$conexion,$phpv){//verifica en todas las tabla que exista. si no devulve un array con la tablas que no existen 
 	echo"<div style='position: relative;background: #000000c2;margin: 1px 5px;left: 0px;width: 805px;padding: 5px;height: 180px;overflow-y: auto; overflow-x: hidden;'>";
-	if($_POST[name2set]==Nuevo)		echo libre_v1::input2(text,'','',"Verificando Disponiblilidad",'width: 100%;text-align: center;margin: 0px 1px;background: #102f41;color: white;');
-	if($_POST[name2set]==Modificar)	echo libre_v1::input2(text,'','',"Verificando Estado",'width: 100%;text-align: center;margin: 0px 1px;background: #102f41;color: white;');
+	if($_POST['name2set']=='Nuevo')		echo libre_v1::input2('text','','',"Verificando Disponiblilidad",'width: 100%;text-align: center;margin: 0px 1px;background: #102f41;color: white;');
+	if($_POST['name2set']=='Modificar')	echo libre_v1::input2('text','','',"Verificando Estado",'width: 100%;text-align: center;margin: 0px 1px;background: #102f41;color: white;');
 	if($tb==''){
-		if($array[version]=="descarga_db"){//compatibilidad con [descarga_db]
+		if($array['version']=="descarga_db"){//compatibilidad con [descarga_db]
 			$tb=$array[tablas];
 			$colum=$array[columnas];
 		}
@@ -230,12 +232,12 @@ function Verifica_en_tablas2($id,$tb,$array,$array_deseado,$conexion,$phpv){//ve
 		}
 		if($deseado==true){							//si la tabla es para verificar 
 			$res = Verifica_existe($id,$tb[$x],$conexion,$phpv);		
-			if($_POST[name2set]==Nuevo){
+			if($_POST['name2set']=='Nuevo'){
 				echo"<div style='float: left;margin: 1px 1px;background: #ffffffb5;width: 260px;'>";
 				if($res==0){
-					echo libre_v1::input2(text,'','',"Tabla",'margin: 0px .5px;');
+					echo libre_v1::input2('text','','',"Tabla",'margin: 0px .5px;');
 					echo libre_v1::input2(text,'','',$tb[$x],'margin: 0px .5px;');
-					echo libre_v1::input2(text,'','',"OK",'background: #34374b; color: #00ff00;text-align: center;width: 50px;margin: 0px .5px;');
+					echo libre_v1::input2('text','','',"OK",'background: #34374b; color: #00ff00;text-align: center;width: 50px;margin: 0px .5px;');
 				}
 				if($res==1){
 					echo libre_v1::input2(text,'','',"Tabla",'margin: 0px .5px;');
@@ -244,7 +246,7 @@ function Verifica_en_tablas2($id,$tb,$array,$array_deseado,$conexion,$phpv){//ve
 				}
 				echo"</div>";
 			}
-			if($_POST[name2set]==Modificar){
+			if($_POST['name2set']=='Modificar'){
 				echo"<div style='float: left;margin: 1px 1px;background: #ffffffb5;width: 260px;'>";
 				if($res==1){
 					echo libre_v1::input2(text,'','',"Tabla",'margin: 0px .5px;');
@@ -257,9 +259,6 @@ function Verifica_en_tablas2($id,$tb,$array,$array_deseado,$conexion,$phpv){//ve
 					echo libre_v1::input2(text,'','',"X",'background: #34374b; color: #ff0000;text-align: center;width: 50px;margin: 0px .5px;');
 				}
 				echo"</div>";
-			}
-			if($_POST[name2set]==Modificar){
-				
 			}
 			if($res==0){//almacena las datos que tiene errores 
 				$array_error[]=$tb[$x];
@@ -522,7 +521,7 @@ function array_update($id,$name_id,$tb,$array_name,$array_value,$tipo,$array_exe
 function actua2($carta,$conexion,$phpv,$inteface){
 	echo libre_v1::input2(text,'','',"Actualizando Cuentas Vinculadas($carta)",'width: 100%;text-align: center;margin: 0px 1px;background: #102f41;color: white;');
 	
-	//datos de la cueta actual 
+	//datos de la cuenta actual 
 	$consu24_actua		= libre_v1::consulta(abo_acu,$conexion,ID_G,$carta,'','',$phpv,'','');//descarga los datos de la cuenta actual 
 	$abo_acu_actua		= libre_v1::mysql_fe_ar($consu24_actua,$phpv);//empaqueta los datos 
 	//datos en la cuenta arrastrada 

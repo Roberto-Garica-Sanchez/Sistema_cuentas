@@ -49,9 +49,9 @@ if(empty($_POST['operador']))$_POST['operador']='';
 if($_POST['operador']=='Limpiar'){include("limpia.php");}
 #echo"<div id='div_centro' style='color: black;width: 1250px;position: relative;overflow: hidden;top: 45px;height: 600px;background: url(../img/8.jpg);margin-right: auto;margin-left: auto;'>";
 	
-if($_POST['Soft_version']=='Ares'){	
+if($_POST['Soft_version']=='ares'){	
 	if ($_POST['name2set']=='Nuevo')		{include("Nuevo.php");}
-	if ($_POST['name2set']=='Folder')		{include("folder2.php");}
+	if ($_POST['name2set']=='Folder')		{include("folder.php");}
 	#if ($_POST['name2set']=='Arc. Mur.')	{include("Baul.php");}
 	//if ($_POST[name2set]==Modificar)	{include("Cambio2.php");}
 	if ($_POST['name2set']=='Modificar')	{include("Nuevo.php");}

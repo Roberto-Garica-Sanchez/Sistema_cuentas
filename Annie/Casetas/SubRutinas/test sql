@@ -1,0 +1,73 @@
+SELECT SUM(repostajes_unidades.Total_Despachado), SUM(repostajes_tanques.Litros_Resividos) FROM repostajes_unidades,repostajes_tanques where repostajes_tanques.IDTanque='Auto Abasto'
+SELECT SUM(repostajes_tanques.Litros_Resividos) FROM repostajes_tanques where repostajes_tanques.IDTanque='Auto Abasto'
+
+
+
+SELECT * FROM repostajes_unidades INNER JOIN repostajes_tanques ON repostajes_unidades.TanqueSurtidor=repostajes_tanques.IDTanque  where repostajes_unidades.TanqueSurtidor='Auto Abasto'
+
+SELECT 
+    repostajes_tanques.Litros_Resividos,
+    repostajes_unidades.Total_Despachado,
+    SUM(repostajes_tanques.Litros_Resividos),
+    sum(repostajes_unidades.Total_Despachado),
+    (SUM(repostajes_tanques.Litros_Resividos)-SUM(repostajes_unidades.Total_Despachado)) 
+FROM 
+    repostajes_unidades INNER JOIN repostajes_tanques ON 
+    repostajes_unidades.TanqueSurtidor=repostajes_tanques.IDTanque 
+where 
+    repostajes_unidades.TanqueSurtidor='Auto Abasto'
+
+SELECT 
+    *
+FROM 
+    repostajes_unidades 
+    INNER JOIN 
+        repostajes_tanques ON
+        repostajes_tanques.IDTanque =repostajes_unidades.TanqueSurtidor
+    JOIN 
+        tanques ON  
+        tanques.Nombre =repostajes_unidades.TanqueSurtidor
+where 
+    repostajes_unidades.TanqueSurtidor='Auto Abasto'
+    
+
+SELECT repostajes_tanques.Litros_Resividos, repostajes_unidades.Total_Despachado, (SUM(repostajes_tanques.Litros_Resividos)-sum(repostajes_unidades.Total_Despachado)) FROM repostajes_unidades INNER JOIN Tanque ON Tanque.Nombre = repostajes_unidades.TanqueSurtidor
+
+
+
+                    $array=array(
+                        "tabla"=>$tabla,
+                        "Operacion"=>
+                        array(
+                            'SELECT'=>array(
+                                "Activar"	=>'true',
+                                "LIKE"		=>'falses',
+                                "getColumnas"	=>Array('repostajes_tanques.Litros_Resividos','repostajes_unidades.Total_Despachado','(SUM(repostajes_tanques.Litros_Resividos)-sum(repostajes_unidades.Total_Despachado))'),
+                                "BuscaColumnas"	=>array(),
+                                "BuscaDatos"	=>array(),
+                                "Condiciones"	=>array(),
+                                "LIMIT"			=>array(
+                                    "Elementos"=>'',
+                                    "posicion"=>''
+                                ),
+                                "JOIN"=>array(
+                                    'Inner Join'=>Array(
+                                        'ColumnaUnion'=>'IDTanque',	
+                                        'vinculos'=>array(
+                                            'tabla'=>array('repostajes_unidades'),
+                                            'columna'=>array('TanqueSurtidor'),
+                                            
+                                        )
+                                    )
+                                )
+        
+                            )
+                        )
+                    ); 
+                    $Ares_v1->GeneraSql($array);
+                    $Ares_v1->viewsql();
+                    $res=$Ares_v1->getsql();
+                    $libre_v2->db('combustible',$conexion,$phpv);
+                    $resultado=$libre_v2->ejecuta($conexion,$res,$phpv);
+                    $datos=mysqli_fetch_row ($resultado);
+                    

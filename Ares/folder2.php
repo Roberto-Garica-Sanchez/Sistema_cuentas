@@ -335,7 +335,7 @@ if($folio['Revisado']==1)	{$estado='Revisado';$_POST['CambRevi']=$revi; 	$style_
 		############################## Ventada de datos 
 			echo"<div id='Datos_res' style='position: relative;background: #05486cab;padding: 5px;overflow-y: auto;border: 1px solid #0e6a9c;height: 68vh; width: max-content;'>";	
 			
-				$res="SELECT * FROM fechas WHERE A >= $_POST[A_i] AND A <= $_POST[A_f] ORDER BY ID_G DESC";
+				echo $res="SELECT * FROM fechas WHERE A >= $_POST[A_i] AND A <= $_POST[A_f] ORDER BY ID_G DESC";
 				if($_POST['A_i']==$_POST['A_f'])$res="SELECT * FROM fechas WHERE A >= $_POST[A_i] AND A <= $_POST[A_f] AND M >= $_POST[M_i] AND M <= $_POST[M_f] ORDER BY ID_G DESC";
 				
 				$consu_fecha	= $libre_v2->ejecuta($conexion,$res,$phpv);

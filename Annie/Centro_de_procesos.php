@@ -3,7 +3,7 @@
     $elemento='folio';#nombre del archivo 
     $tabla='informacion_vital';
     $name_validacion='folio'; 
-    $database=$_POST['name_programa'].'_'.$_POST['Soft_version'].'_a';
+    echo $database=$_POST['name_programa'].'_'.$_POST['Soft_version'].'';
     include("enrutador.php");
 #cartas porte     
 /*

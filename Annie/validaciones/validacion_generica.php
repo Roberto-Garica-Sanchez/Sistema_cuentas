@@ -1,28 +1,5 @@
 <?php 
-/*
-    #validacion generiaca 
-    $libre_v4-> Columnas($database,$tabla);
-    $columnas=$libre_v4->getColumnas();
-    $libre_v4->KeyColumnUsege($database,$tabla);
-    $key=$libre_v4->getKeyColumnUsege();
-    $validacionGeneral='true';
-    $validacion='true';
-    $vacio=array();
-    //verifica si las columnas estan vacias []
-    for ($x=0; $x <count($columnas) ; $x++) {
-        if(empty($_POST[$columnas[$x]]) and $key!=$columnas[$x]){
-            $validacion='false';$validacionGeneral='false';
-            if(empty($consola))$consola='';
-            $consola=$consola.$columnas[$x]."<br>";
-        }else{
-            $validacion='true';
-        }
-        
-        $vacio[$columnas[$x]]=$validacion;
-    }
-    
-    $validacionFormularo=$vacio;
-*/
+ 
 #validacion generiaca v2 
 $libre_v4-> Columnas($database,$tabla);             
 $columnas=$libre_v4->getColumnas();         //obtiene las columnas de la tabla donde se guardar la informacion
@@ -48,27 +25,13 @@ $columnas=$libre_v4->getColumnas();         //obtiene las columnas de la tabla d
 #verifica si las columnas estan vacias
     $vacio=array();   
     for ($x=0; $x <count($columnas) ; $x++) {
-        echo $columnas[$x];
-        #PHP strtoupper(): Convierte a mayúsculas los caracteres de una cadena string.
-        #PHP strtolower(): Convierte a minúsculas los caracteres de una cadena string.
-        #PHP ucfirst(): Convierte a mayúsculas el primer caracter de una cadena string.
-        #PHP ucwords(): Convirte a mayúsculas el primer caracter de cada palabra de una cadena o string.
-        #echo isset($_POST[$columnas[$x]]);
-        echo " / ";
-        echo $name=strtoupper($columnas[$x]);   if(isset($_POST[$name])){echo "<a style='color: red;'> : 1 </a>";}else{echo " : 0 ";}
-        echo " / ";
-        echo $name=strtolower($columnas[$x]);   if(isset($_POST[$name])){echo "<a style='color: red;'> : 1 </a>";}else{echo " : 0 ";}
-        echo " / ";
-        echo $name=ucwords($columnas[$x]);      if(isset($_POST[$name])){echo "<a style='color: red;'> : 1 </a>";}else{echo " : 0 ";}
-        echo " / ";
-        echo $name=strtoupper($columnas[$x]);   if(isset($_POST[$name])){echo "<a style='color: red;'> : 1 </a>";}else{echo " : 0 ";}
-        
-        echo "<br>";
-        if(empty($_POST[$columnas[$x]]) and $key!=$columnas[$x]){
+        if(isset($_POST[$columnas[$x]]))        #verifica que exista la variable 
+        if(!is_numeric($_POST[$columnas[$x]]))  #verifica que no sea numerica (permitira que los 0 sean contemplados como true)
+        if(empty($_POST[$columnas[$x]]) and $key!=$columnas[$x]){ #verifica que no este vacia y que no sea el ID
             $validacion_de_campos['Validacion_general']=false; # detiene los procesos 
             $validacion_de_campos['Campos_vacios'][$columnas[$x]]=false;
             $validacion_de_campos['Campos_vacios']['validacion']=false;
-        } 
+        }        
 
     }
 #validaciones para valores no permitidos   (universal, desacativado )  
@@ -80,7 +43,7 @@ $columnas=$libre_v4->getColumnas();         //obtiene las columnas de la tabla d
     );
     for ($i=0; $i <count($columnas) ; $i++) {
         if(!empty($valores_no_validos[$columnas[$i]])){
-            if(!empty($_POST[$columnas[$i]]) and $_POST[$columnas[$i]]==$valores_no_validos[$columnas[$i]]){
+            if(!empty($_POST[$columnas[$i]]) and $_POST[$columnas[$i]]==$valores_no_validos[$columnas[$i]] ){
                 $validacion_de_campos['Validacion_general']=false; # detiene los procesos 
                 $validacion_de_campos['noDefaul'][$columnas[$i]]=false;
                 $validacion_de_campos['noDefaul']['validacion']=false;
@@ -93,10 +56,4 @@ $columnas=$libre_v4->getColumnas();         //obtiene las columnas de la tabla d
     if(!empty($_POST['ID'])){
         $validacion_de_campos['Validacion_insert']=false;
     }
-    
-#name_validacion
-if(!empty($name_validacion)){
-    $sistema_validaciones[$name_validacion]=$validacion_de_campos;
-    $name_validacion='';
-}
 ?>

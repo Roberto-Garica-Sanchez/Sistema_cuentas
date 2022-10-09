@@ -1,12 +1,15 @@
 <?php
-if ($libre_v1=='')	{	include("../libre_v1.php");}	if ($libre_v1==''){echo"Error de Carga 'libre_v1'";}
-if ($libre_v2=='')	{	include("../libre_v2.php");}	if ($libre_v2==''){echo"Error de Carga 'libre_v2'";}
-$libre_v2->db('empresa',$conexion,$phpv);	
+#if ($libre_v1=='')	{	include("../libre_v1.php");}	if ($libre_v1==''){echo"Error de Carga 'libre_v1'";}
+#if ($libre_v2=='')	{	include("../libre_v2.php");}	if ($libre_v2==''){echo"Error de Carga 'libre_v2'";}
+
+$database='sistema_cuentas_annie';
+$tabla='folio';
+$libre_v2->db($database,$conexion,$phpv);	
 ## descarga la cuenta selecionada 
 	if (!empty($_POST['Carta'])){
-		echo"<div id='info_proceso_descarga' style=' display: block;float: left; background: white; color: black; left: 50px;  position: absolute;font-size: 11px; z-index:1;'>";
-		include('descarga_cue3.php');
-		$libre_v4->KeyColumnUsege('empresa','abo_acu');
+		echo"<div id='info_proceso_descarga' style='display: block;padding: 5px;float: right;background: #05486cab;color: black;position: relative;font-size: 10px;width: min-content;'>";	
+		include('descarga_cue4.php');
+		#$libre_v4->KeyColumnUsege($database,'abo_acu');
 		#$libre_v4->viewKeyColumnUsege();
 		echo"</div>";
 	}
@@ -52,7 +55,7 @@ $libre_v2->db('empresa',$conexion,$phpv);
 	if(empty($style_flete_r ))	$style_flete_r    ='';
 	if(empty($style_come  ))	$style_come     ='';
 	if(empty($N_fact))	$N_fact='';
-$libre_v2->db('empresa',$conexion,$phpv);	
+$libre_v2->db($database,$conexion,$phpv);	
 //---------------------------modifica el estado de revisado 
 IF (!empty($_POST['CambRevi'])and $_POST['CambRevi']=='Pendiente'){
 	$array=array(
@@ -95,13 +98,15 @@ IF (!empty($_POST['CambRevi'])and $_POST['CambRevi']=='Revisado'){
 $consu_folio	=$libre_v2->consulta		('folio',$conexion	,'ID_G',$_POST['Carta1'],'ID_G','1'	,$phpv,'','');
 $folio			=$libre_v2->mysql_fe_ar	($consu_folio,$phpv,'');
 if(empty($revi))$revi='';
-if($folio['Revisado']==0)	{$estado='Pendiente';$_POST['CambRevi']=$revi; 	$style_estado="background: pink; color: black;";}
-if($folio['Revisado']==1)	{$estado='Revisado';$_POST['CambRevi']=$revi; 	$style_estado="background: Greenyellow; color: black;";}
+#if( and $folio['Revisado']==0)	{$estado='Pendiente';$_POST['CambRevi']=$revi; 	$style_estado="background: pink; color: black;";}
+#if($folio['Revisado']==1)	{$estado='Revisado';$_POST['CambRevi']=$revi; 	$style_estado="background: Greenyellow; color: black;";}
 
+#### #### Sistema de validacion 
+include('Validaciones/folio.php');
 
 
 //---------------------------- Elimina la cuenta 
-	if($_POST['operador']=='Eliminar'){
+	if(!empty($_POST['operador']) and  $_POST['operador']=='Eliminar'){
 		$style_elimina="display: none;";
 		$style_elimina_confirma="display: block;";
 		$style_cancela="display: block;";
@@ -112,47 +117,12 @@ if($folio['Revisado']==1)	{$estado='Revisado';$_POST['CambRevi']=$revi; 	$style_
 	}
 
 ################################ Inferface
+
+	include_once('interface/nuevo_registro/datos_principales.php');	
+	/*
 	//---------------------------- [generarl info]
 		echo"<div id='general_info' style='padding: 5px; background: #05486cab;width: 220px;right: 0px;top: 0px;bottom: 0px;position: relative;color: white;    float: right;'>";
 			echo"<div id='datos_info'>";
-			if(empty($_POST['Carta0']))$_POST['Carta0']='';
-			if(empty($_POST['Carta1']))$_POST['Carta1']='';
-			if(empty($_POST['Carta2']))$_POST['Carta2']='';
-			if(empty($_POST['Carta3']))$_POST['Carta3']='';
-			if(empty($_POST['Carta4']))$_POST['Carta4']='';
-			if(empty($_POST['chofer']))$_POST['chofer']='';
-			if(empty($_POST['placas']))$_POST['placas']='';
-			if(empty($_POST['cliente']))$_POST['cliente']='';
-
-			if(empty($_POST['D']))$_POST['D']='';
-			if(empty($_POST['M']))$_POST['M']='';
-			if(empty($_POST['A']))$_POST['A']='';
-			if(empty($_POST['D_r']))$_POST['D_r']='';
-			if(empty($_POST['M_r']))$_POST['M_r']='';
-			if(empty($_POST['A_r']))$_POST['A_r']='';
-			if(empty($_POST['km_i']))$_POST['km_i']='';
-			if(empty($_POST['km_f']))$_POST['km_f']='';
-			if(empty($_POST['flete_r']))$_POST['flete_r']='';
-			if(empty($_POST['come']))$_POST['come']='';
-
-			if(empty($style_chofer))$style_chofer='';
-			if(empty($$style_placas))$style_placas='';
-			if(empty($style_cliente))$style_cliente='';
-			if(empty($style_Carta1 ))$style_Carta1 ='';
-			if(empty($style_Carta2 ))$style_Carta2 ='';
-			if(empty($style_Carta3 ))$style_Carta3 ='';
-			if(empty($style_Carta4 ))$style_Carta4 ='';
-			if(empty($style_D))		$style_D ='';
-			if(empty($style_M))		$style_M  ='';
-			if(empty($style_A))		$style_A  ='';
-			if(empty($style_D_r))	$style_D_r  ='';
-			if(empty($style_M_r))	$style_M_r  ='';
-			if(empty($style_A_r))	$style_A_r  ='';
-			if(empty($style_km_i))	$style_km_i   ='';
-			if(empty($style_km_f))	$style_km_f   ='';
-			if(empty($style_flete_r ))	$style_flete_r    ='';
-			if(empty($style_come  ))	$style_come     ='';
-			if(empty($N_fact))	$N_fact='';
 				echo $libre_v2->input2('text','','','Estado'					,"width: 40%",'',"disabled",'botone_n');
 				echo $libre_v2->input2('submit','CambRevi','',$estado			,$style_estado."width: 60%",'',"",'botones_submenu');//.$libre_v2->input2(text,'CambRevi','',$_POST[CambRevi],"",'',"");
 				
@@ -192,7 +162,7 @@ if($folio['Revisado']==1)	{$estado='Revisado';$_POST['CambRevi']=$revi; 	$style_
 				echo $libre_v2->input2('text','flete_r','',$_POST['flete_r']	,"width: 60%".$style_flete_r,''		,'readonly="readonly"onkeypress="return valida_n(event)"','botones_submenu');
 				
 				echo $libre_v2->input2('text','',''	,'N° Cuenta'		,"width: 40%"				,''		,"disabled",'botone_n');
-				echo $libre_v2->input2('text','n_c','',$N_fact+1			,"width: 60%"				,'n_c'		,"readonly=''",'botones_submenu');
+				echo $libre_v2->input2('text','n_c','',$N_fact			,"width: 60%"				,'n_c'		,"readonly=''",'botones_submenu');
 				
 				
 				echo $libre_v2->input2('text','','','Comentarios'			,"width: 100%"				,'',"disabled",'botone_n');
@@ -207,42 +177,9 @@ if($folio['Revisado']==1)	{$estado='Revisado';$_POST['CambRevi']=$revi; 	$style_
 			//echo $libre_v2->input2(button,'operador','',"Guardar Cambios",'display: none;	width: 110px;position: absolute;bottom: 5px;right: 0px;'	,'cambio_cuenta'		,'',botones_submenu);
 			//echo $libre_v2->input2(button,'operador','',"Confirmar"		,'	: none;	width: 110px;position: absolute;bottom: 40px;right: 0px;background: yellow;color: black;','confirma_cuenta','',botones_submenu);
 		echo"</div>";	
-	
-		//---------------------------- memorias
-		echo"<div style='position: relative;z-index: 1;display: block;'>";
-			$type='hidden';
-			$style_presenta2='border: 1px solid #0b6fce;';
-			$total1=	$libre_v2->presenta2 ('hidden_fe'		,'1TEXT_C','1TEXT',$type,$style_presenta2,'','');
-			$total2=	$libre_v2->presenta2 ('hidden_v'		,'2TEXT_C','2TEXT',$type,$style_presenta2,'','');
-			$total3=	$libre_v2->presenta2 ('hidden_d'		,'3TEXT_C','3TEXT',$type,$style_presenta2,'','');
-			$total4=	$libre_v2->presenta2 ('hidden_c'		,'4TEXT_C','4TEXT',$type,$style_presenta2,'','');
-			$total4_via=$libre_v2->presenta2 ('hidden_c_via'	,'4TEXT_C_VIA','4TEXT_VIA',$type,$style_presenta2,'','');
-			$total5=	$libre_v2->presenta2 ('hidden_f'		,'5TEXT_C','5TEXT',$type,$style_presenta2,'','');
-			$total6=	$libre_v2->presenta2 ('hidden_r'		,'6TEXT_C','6TEXT',$type,$style_presenta2,'','');
-			$total7=	$libre_v2->presenta2 ('hidden_g'		,'7TEXT_C','7TEXT',$type,$style_presenta2,'','');
-			$total8=	$libre_v2->presenta2 ('hidden_m'		,'8TEXT_C','8TEXT',$type,$style_presenta2,'','');
-			$total9=	$libre_v2->presenta2 ('hidden_ab'		,'ab_Com','ab',$type,$style_presenta2,'','');
-			$total10=	$libre_v2->presenta2 ('hidden_ac'		,'ID_ac','ac',$type,$style_presenta2,'','');
-
-			echo $libre_v2->input2($type,'comi','',$_POST['comi'],'','','','');
-			echo $libre_v2->input2($type,'presio_d','',$_POST['presio_d'],'','','','');
-			/*
-			echo $libre_v2->input2($type,'hidden_fe','',$_POST['hidden_fe'],'','','','');
-			echo $libre_v2->input2($type,'hidden_v','',$_POST['hidden_v'],'','','','');
-			echo $libre_v2->input2($type,'hidden_d','',$_POST['hidden_d'],'','','','');
-			echo $libre_v2->input2($type,'hidden_c','',$_POST['hidden_c'],'','','','');
-			echo $libre_v2->input2($type,'hidden_c_via','',$_POST['hidden_c_via'],'','','','');
-			echo $libre_v2->input2($type,'hidden_f','',$_POST['hidden_f'],'','','','');
-			echo $libre_v2->input2($type,'hidden_r','',$_POST['hidden_r'],'','','','');
-			echo $libre_v2->input2($type,'hidden_g','',$_POST['hidden_g'],'','','','');
-			echo $libre_v2->input2($type,'hidden_m','',$_POST['hidden_m'],'','','','');
-			echo $libre_v2->input2($type,'hidden_c','',$_POST['hidden_c'],'','','','');
-			echo $libre_v2->input2($type,'hidden_ab','',$_POST['hidden_ab'],'','','','');
-			echo $libre_v2->input2($type,'hidden_ac','',$_POST['hidden_ac'],'','','','');
-			echo $libre_v2->input2($type,'hidden_ac_a','',$_POST['hidden_ac_a'],'','','','');	
-			*/
-		echo"</div>";
+	*/
 	############################## lista de choferes 
+	/*
 		echo"<div style='display: none;background: #000000c4;overflow-y: auto;width: 145px;height: 350px;bottom: 0px;position: absolute;'>";
 			$folios	=$libre_v2->consulta		('choferes',$conexion	,'','','',''	,$phpv,'','');
 			$libre_v2->mysql_da_se($folios,0,$phpv);	
@@ -253,6 +190,7 @@ if($folio['Revisado']==1)	{$estado='Revisado';$_POST['CambRevi']=$revi; 	$style_
 				echo "<br>";
 			}
 		echo"</div>";
+		*/
 	############################## consola
 		echo"<div id='Datos_conso' style='position: absolute;bottom: 0px;left: 145px;right: 230px;height: 28px;background: rgba(0, 0, 0, 0.76);box-shadow: inset 0px 0px 0px 1px white;overflow-y: auto;'>";
 		echo"</div>";
@@ -261,7 +199,7 @@ if($folio['Revisado']==1)	{$estado='Revisado';$_POST['CambRevi']=$revi; 	$style_
 		############################## controles de busqueda
 			echo"<div style='position: relative;background: #b1b4b5;border: 1px solid #676767;overflow: hidden;'  >";	
 
-				$libre_v2->db					('empresa',$conexion,$phpv);	
+				$libre_v2->db					($database,$conexion,$phpv);	
 				$consu1		= $libre_v2->consulta			('choferes',$conexion	,'','','',''	,$phpv,'','');
 				$consu2		= $libre_v2->consulta			('placas',$conexion	,'','','',''	,$phpv,'','');
 				$consu3		= $libre_v2->consulta			('clientes',$conexion	,'','','',''	,$phpv,'','');	
@@ -335,26 +273,23 @@ if($folio['Revisado']==1)	{$estado='Revisado';$_POST['CambRevi']=$revi; 	$style_
 				echo"</div>";	
 		############################## Ventada de datos 
 			echo"<div id='Datos_res' style='position: relative;background: #05486cab;padding: 5px;overflow-y: auto;border: 1px solid #0e6a9c;height: 68vh; width: max-content;'>";	
-			
-				$res="SELECT * FROM fechas WHERE A >= $_POST[A_i] AND A <= $_POST[A_f] ORDER BY ID_G DESC";
-				if($_POST['A_i']==$_POST['A_f'])$res="SELECT * FROM fechas WHERE A >= $_POST[A_i] AND A <= $_POST[A_f] AND M >= $_POST[M_i] AND M <= $_POST[M_f] ORDER BY ID_G DESC";
+				$res="SELECT * FROM fechas";
+				#$res="SELECT * FROM fechas WHERE A >= $_POST[A_i] AND A <= $_POST[A_f] ORDER BY ID_G DESC";
+				#if($_POST['A_i']==$_POST['A_f'])$res="SELECT * FROM fechas WHERE A >= $_POST[A_i] AND A <= $_POST[A_f] AND M >= $_POST[M_i] AND M <= $_POST[M_f] ORDER BY ID_G DESC";
 				
 				$consu_fecha	= $libre_v2->ejecuta($conexion,$res,$phpv);
 				$N_Datos_consu_fecha=$libre_v2->mysql_nu_ro($consu_fecha,$phpv);
 				if($N_Datos_consu_fecha>0){
 					$libre_v2->mysql_da_se		($consu_fecha,0,$phpv);
-					$D_i	=$libre_v2->zero($_POST['D_i']);	$A_i=$libre_v2->zero($_POST['A_i']);	$M_i=$libre_v2->zero($_POST['M_i']);
-					$D_f	=$libre_v2->zero($_POST['D_f']);	$A_f=$libre_v2->zero($_POST['A_f']);	$M_f=$libre_v2->zero($_POST['M_f']);
-					$fec_ini= $A_i.$M_i.$D_i;
-					$fec_fin= $A_f.$M_f.$D_f;
 					$x=0;
+					
 					while($fechas=$libre_v2->mysql_fe_ar($consu_fecha,$phpv,'')){
 						echo"<div>";
-							$D		=$libre_v2->zero($fechas['D']);		$A	=$libre_v2->zero($fechas['A']);	$M	=$libre_v2->zero($fechas['M']);
-							$D_c	=$libre_v2->zero($fechas['D_c']);		$A_c=$libre_v2->zero($fechas['A_c']);	$M_c=$libre_v2->zero($fechas['M_c']);
-							$fec_set= $A.$M.$D;
+							#$D		=$libre_v2->zero($fechas['D']);		$A	=$libre_v2->zero($fechas['A']);	$M	=$libre_v2->zero($fechas['M']);
+							#$D_c	=$libre_v2->zero($fechas['D_c']);		$A_c=$libre_v2->zero($fechas['A_c']);	$M_c=$libre_v2->zero($fechas['M_c']);
+							#$fec_set= $A.$M.$D;
 							
-							if(($fec_ini<=$fec_set)&&($fec_fin>=$fec_set)){
+							#if(($fec_ini<=$fec_set)&&($fec_fin>=$fec_set)){
 								$consu_abo_acu	=$libre_v2->consulta('abo_acu',$conexion	,'ID_G',$fechas['ID_G'],'ID_G','1'	,$phpv,'','');
 								$N_Datos_consu_abo_acu=$libre_v2->mysql_nu_ro($consu_abo_acu,$phpv);
 								if($N_Datos_consu_abo_acu>0){
@@ -369,28 +304,27 @@ if($folio['Revisado']==1)	{$estado='Revisado';$_POST['CambRevi']=$revi; 	$style_
 									$N_Datos_folios=$libre_v2->mysql_nu_ro($folios,$phpv);
 									if($N_Datos_folios>0){
 										$folio=$libre_v2->mysql_fe_ar		($folios,$phpv,'');
-										if($folio<>""){
+										if(!empty($folio)){
 											$x++;
-											if($abo_acu['add_en']==''){$style='background:#121212;';	$Estado="Libre";}
-											if($abo_acu['add_en']<>''){$style='background:#6d6d6d;';	$Estado="Arrastrada";}
-											if($folio['Revisado']==0){$style_Revisado="color: red;";			$Revisado="Pendiente";}
-											if($folio['Revisado']==1){$style_Revisado="color: yellowgreen;";	$Revisado="Revisada";}
+											if($abo_acu['add_en']==''){$style='background:#121212; color: white;';	$Estado="Libre";}
+											if($abo_acu['add_en']!=''){$style='background:#6d6d6d; color: black;';	$Estado="Arrastrada";}
+											#if($folio['Revisado']==0 or $folio['Revisado']=='Pendiente'){$style_Revisado="color: red;";			$Revisado="Pendiente";}
+											#if($folio['Revisado']==1 or $folio['Revisado']=='Revisado'){$style_Revisado="color: yellowgreen;";	$Revisado="Revisada";}
 											$fecha="$fechas[D]-$fechas[M]-$fechas[A]";
-											echo $libre_v2->input2('text','',''		,$x						,"margin: 2px .5px;text-align: center;color: white; float:left; width: 40px;".$style,'','','');
-											//echo $libre_v2->input2(submit,Carta,''	,$fechas[ID_G]		,"margin: 2px .5px;text-align: center; width: 50px;color: white; background: #102f41;",botones_submenu);
-											echo $libre_v2->input2('submit','Carta',''	,$fechas['ID_G']	,"margin: 2px .5px;text-align: center; 				float:left; width: 50px; height: 15px;",'','','botones_submenu');
-											echo $libre_v2->input2('text','',''		,$abo_acu['Total_Total'],"margin: 2px .5px;text-align: center;color: white; float:left;".$style,'','','');
-											echo $libre_v2->input2('text','',''		,$folio['sueldo']		,"margin: 2px .5px;text-align: center;color: white; float:left;".$style,'','','');
-											echo $libre_v2->input2('text','',''		,$fecha					,"margin: 2px .5px;text-align: center;color: white; float:left;".$style,'','','');
+											echo $libre_v2->input2('text','',''		,$x						,"margin: 2px .5px;text-align: center; float:left; width: 40px;".$style,'','','');
+											echo $libre_v2->input2('submit','Carta',''	,$fechas['ID_G']	,"margin: 2px .5px;text-align: center; float:left; width: 50px; height: 15px; background: #3F51B5;",'','','botones_submenu');
+											echo $libre_v2->input2('text','',''		,$abo_acu['Total_Total'],"margin: 2px .5px;text-align: center; float:left;".$style,'','','');
+											#echo $libre_v2->input2('text','',''		,$folio['sueldo']		,"margin: 2px .5px;text-align: center; float:left;".$style,'','','');
+											echo $libre_v2->input2('text','',''		,$fecha					,"margin: 2px .5px;text-align: center; float:left;".$style,'','','');
 											
-											echo $libre_v2->input2('text','',''		,$folio['CLIENTE']		,"margin: 2px .5px;text-align: center; color: white; float:left; width: 250px;".$style,'','','');
-											echo $libre_v2->input2('text','',''		,$Revisado				,"margin: 2px .5px;text-align: center; color: white; float:left;".$style.$style_Revisado,'','','');
-											echo $libre_v2->input2('text','',''		,$Estado				,"margin: 2px .5px;text-align: center; color: white; float:left;".$style,'','','');
+											echo $libre_v2->input2('text','',''		,$folio['CLIENTE']		,"margin: 2px .5px;text-align: center; float:left; width: 250px;".$style,'','','');
+											#echo $libre_v2->input2('text','',''		,$Revisado				,"margin: 2px .5px;text-align: center; float:left;".$style.$style_Revisado,'','','');
+											echo $libre_v2->input2('text','',''		,$Estado				,"margin: 2px .5px;text-align: center; float:left;".$style,'','','');
 											
 										}
 									}
 								}
-							}
+							#}
 						echo"</div>";
 					}
 				}else{

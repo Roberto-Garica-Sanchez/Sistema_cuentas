@@ -7,7 +7,7 @@
                 define('Menu_Nombre_casetas_prinipal','Menu_casetas_prinipal');
                 $elemento_menu=array('Lista Casetas','Pago De casetas');
                 $class=array(
-                    'Conte_princiapal'=>'Lateral',
+                    'Conte_principal'=>'Lateral',
                     'Div_Opcion'=>'',
                     'Boton'=>'Boton_menu1',
                     'img'=>''

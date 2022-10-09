@@ -15,7 +15,8 @@ echo"
 	<body onload='load();'>
 		<?php			
 		echo'<form action="" method="POST" enctype="multipart/form-data" id="formu1">'; 
-			include_once($_SERVER["DOCUMENT_ROOT"]."/Librerias/Gestor_librerias.php");
+			include_once($_SERVER["DOCUMENT_ROOT"]."/Librerias/General/Auto_load.php");
+			
 
 			/*
 				include_once($_SERVER["DOCUMENT_ROOT"].$libreria."/CentroDeProcesos.php");
@@ -56,36 +57,37 @@ echo"
 					echo"</div>";
 				
 				echo"</div>";
-				echo"<div style='position: absolute;background: #1f1f1f;top: 60px;left: 2%;right: 2%;bottom: 2%;min-height: 558px;'>";
-				
-				if(!empty($_POST['Soft_version']))
-				switch ($_POST['Soft_version']) {
-					case 'ares':
-						$db='empresa';
-						$db_combustible='combustible';
-						#if($_POST['Menu1']==$v1){include_once($_SERVER["DOCUMENT_ROOT"].'/Cliente_de_legado_ares/Cuentas.php');}
-						if($_POST['Menu1']==$v1){include_once($_SERVER["DOCUMENT_ROOT"]."/Sistema_Cuentas/$_POST[Soft_version]/Cuentas.php");}
-						//if($_POST['Menu1']==$v2){include_once($_SERVER["DOCUMENT_ROOT"]."/Sistema_Cuentas/$_POST[Soft_version]/Casetas/body.php");}
-					break;
-					case 'annie':
-						$db='empresa';
-						$db_combustible='combustible';
-						if($_POST['Menu1']==$v1){include_once($_SERVER["DOCUMENT_ROOT"]."/Sistema_Cuentas/$_POST[Soft_version]/Cuentas.php");}
-						if($_POST['Menu1']==$v2){include_once($_SERVER["DOCUMENT_ROOT"]."/Sistema_Cuentas/$_POST[Soft_version]/Casetas/body.php");}
-					break;
-					case 'carmesi':						
-						$db='sistema_cuentas_carmesi';
-						#$db_combustible='combustible';
-						if($_POST['Menu1']==$v1){	
-							include_once($_SERVER["DOCUMENT_ROOT"]."/Sistema_Cuentas/$_POST[Soft_version]/Cuentas.php");
-						}
-					break;
-					case 'celeste':
-						$database='sistema_cuentas_celeste';
-						if($_POST['Menu1']==$v1){include_once($_SERVER["DOCUMENT_ROOT"]."/Sistema_Cuentas/$_POST[Soft_version]/Cuentas.php");}
-					break;
+				#echo"<div style='position: absolute;background: #1f1f1f;top: 60px;left: 2%;right: 2%;bottom: 2%;min-height: 558px;'>";
+				echo"<div style='position: absolute;background: #1f1f1f;top: 60px;left: 0%;right: 0%;bottom: .5%;min-height: 569px;'>";
 					
-				}
+					if(!empty($_POST['Soft_version']))
+					switch ($_POST['Soft_version']) {
+						case 'ares':
+							$db='empresa';
+							$db_combustible='combustible';
+							#if($_POST['Menu1']==$v1){include_once($_SERVER["DOCUMENT_ROOT"].'/Cliente_de_legado_ares/Cuentas.php');}
+							if($_POST['Menu1']==$v1){include_once($_SERVER["DOCUMENT_ROOT"]."/Sistema_Cuentas/$_POST[Soft_version]/Cuentas.php");}
+							//if($_POST['Menu1']==$v2){include_once($_SERVER["DOCUMENT_ROOT"]."/Sistema_Cuentas/$_POST[Soft_version]/Casetas/body.php");}
+						break;
+						case 'annie':
+							$db='empresa';
+							$db_combustible='combustible';
+							if($_POST['Menu1']==$v1){include_once($_SERVER["DOCUMENT_ROOT"]."/Sistema_Cuentas/$_POST[Soft_version]/Cuentas.php");}
+							if($_POST['Menu1']==$v2){include_once($_SERVER["DOCUMENT_ROOT"]."/Sistema_Cuentas/$_POST[Soft_version]/Casetas/body.php");}
+						break;
+						case 'carmesi':						
+							$db='sistema_cuentas_carmesi';
+							#$db_combustible='combustible';
+							if($_POST['Menu1']==$v1){	
+								include_once($_SERVER["DOCUMENT_ROOT"]."/Sistema_Cuentas/$_POST[Soft_version]/Cuentas.php");
+							}
+						break;
+						case 'celeste':
+							$database='sistema_cuentas_celeste';
+							if($_POST['Menu1']==$v1){include_once($_SERVER["DOCUMENT_ROOT"]."/Sistema_Cuentas/$_POST[Soft_version]/body-Manual.php");}
+						break;
+						
+					}
 				
 			
 				echo"</div>";

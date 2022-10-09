@@ -1,5 +1,5 @@
 <?php 
-    $db='empresa';
+    #$db='empresa';
     $tablas=array(
         'folio',
         'abo_acu',
@@ -27,8 +27,8 @@
     
     
     for ($c=0; $c <count($tablas) ; $c++) {
-        $datos_traducion=$tablas_v2->info($db,$tablas[$c]);
-        $columnas=$libre_v4->Columnas($db,$tablas[$c]);
+        $datos_traducion=$tablas_v2->info($database,$tablas[$c]);
+        $columnas=$libre_v4->Columnas($database,$tablas[$c]);
 
         $array=array(
             "tabla"=>$tablas[$c],
@@ -44,7 +44,7 @@
         );
         $Ares_v1-> GeneraSql($array);   
         $sql    =$Ares_v1->getSql();
-        $libre_v2->db('empresa',$conexion,$phpv);
+        $libre_v2->db($database,$conexion,$phpv);
         $consu  =$libre_v2->ejecuta($conexion,$sql,$phpv);
         $datos  =$libre_v2->mysql_fe_ar($consu,$phpv,'');
 
